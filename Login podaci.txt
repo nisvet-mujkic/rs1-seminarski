@@ -1,0 +1,6 @@
+﻿Administrator: 
+	admin admin
+Član uprave: 
+	clan clan
+Poslovođa:
+	poslovodja poslovodja

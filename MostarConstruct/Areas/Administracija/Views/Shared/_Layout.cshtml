@@ -1,0 +1,243 @@
+﻿@{
+    var trenutniKorisnik = httpContextAccessor.HttpContext.Session.GetJson<Korisnik>(Konfiguracija.LogiraniKorisnik) ?? new Korisnik();
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from thevectorlab.net/flatlab/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Dec 2017 18:08:09 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.html">
+
+    <title>MostarConstruct</title>
+    @*<environment include="Development">*@
+    <!-- Bootstrap core CSS -->
+    <script src="~/js/jquery.js"></script>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="~/css/datepicker.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="~/css/datetimepicker.css" type="text/css">
+
+    <!--right slidebar-->
+    <link href="~/css/slidebars.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style-responsive.css" rel="stylesheet" />
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                format: 'dd.mm.yyyy',
+                weekStart: 1,
+                clearBtn: true,
+                language: 'de-DE',
+                autoclose: true,
+                forceParse: false,
+                calendarWeeks: true
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <section id="container">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <i class="fa fa-bars"></i>
+            </div>
+            <!--logo start-->
+            <a href="/home/index" class="logo">Mostar<span>Construct</span></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start  -->
+                <!--  notification end -->
+            </div>
+            <div class="top-nav ">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+                    <li>
+                        <input type="text" class="form-control search" placeholder="Search">
+                    </li>
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="img/avatar1_small.jpg">
+                            <span class="username">@trenutniKorisnik.KorisnickoIme</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+
+                            <li>
+                                <a asp-area="" asp-controller="Racun" asp-action="Odjava"><i class="fa fa-bell-o"></i> Odjava</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <a class="active" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Početna stranica</span>
+                        </a>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-user"></i>
+                            <span>Korisnici</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a asp-area="Administracija" asp-controller="Korisnici" asp-action="Index">Prikaz</a></li>
+                            <li><a asp-area="Administracija" asp-controller="Korisnici" asp-action="Dodaj">Dodaj</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-location-arrow"></i>
+                            <span>Lokacije</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a asp-area="Administracija" asp-controller="Drzave" asp-action="Index">Drzave</a></li>
+                            <li><a asp-area="Administracija" asp-controller="Regije" asp-action="Index">Regije</a></li>
+                            <li><a asp-area="Administracija" asp-controller="Gradovi" asp-action="Index">Gradovi</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-truck"></i>
+                            <span>Vozni park</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a asp-area="Administracija" asp-controller="Vozila" asp-action="Index">Prikaz</a></li>
+                            <li><a asp-area="Administracija" asp-controller="Vozila" asp-action="Dodaj">Dodaj</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-columns"></i>
+                            <span>Inventar</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a asp-area="Administracija" asp-controller="Inventar" asp-action="Index">Prikaz</a></li>
+                            <li><a asp-area="Administracija" asp-controller="Inventar" asp-action="Dodaj">Dodaj</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a asp-area="Administracija" asp-controller="Aktivnosti" asp-action="Index">
+                            <i class="fa fa-list-ol"></i>
+                            <span>Aktivnosti</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--main content start-->
+        @RenderBody()
+        <!--main content end-->
+        <!-- Right Slidebar start -->
+        <!-- Right Slidebar end -->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2018 &copy; Mostar Construct.
+
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="~/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/js/jquery.scrollTo.min.js"></script>
+    <script src="~/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="~/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="~/js/jquery.easy-pie-chart.js"></script>
+    <script src="~/js/owl.carousel.js"></script>
+    <script src="~/js/advanced-form-components.js"></script>
+    <script src="~/js/jquery.customSelect.min.js"></script>
+    <script src="~/js/respond.min.js"></script>
+    <script src="~/js/bootstrap-datetimepicker.js"></script>
+    <script src="~/js/bootstrap-datepicker.js"></script>
+    <!--right slidebar-->
+    <script src="~/js/slidebars.min.js"></script>
+
+    <!--common script for all pages-->
+    <script src="~/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="~/js/sparkline-chart.js"></script>
+    <script src="~/js/easy-pie-chart.js"></script>
+    <script src="~/js/count.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+
+    <script>
+
+        //owl carousel
+
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true,
+                autoPlay: true
+            });
+        });
+
+        //custom select box
+
+        $(function () {
+            $('select.styled').customSelect();
+
+            //$('.datepicker').datepicker();
+        });
+
+        $(window).on("resize", function () {
+            var owl = $("#owl-demo").data("owlCarousel");
+            owl.reinit();
+        });
+
+    </script>
+
+   
+    
+</body>
+
+<!-- Mirrored from thevectorlab.net/flatlab/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Dec 2017 18:09:06 GMT -->
+</html>

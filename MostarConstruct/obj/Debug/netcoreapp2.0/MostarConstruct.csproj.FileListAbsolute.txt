@@ -1,0 +1,11 @@
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\bin\Debug\netcoreapp2.0\MostarConstruct.deps.json
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\bin\Debug\netcoreapp2.0\MostarConstruct.runtimeconfig.json
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\bin\Debug\netcoreapp2.0\MostarConstruct.runtimeconfig.dev.json
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\bin\Debug\netcoreapp2.0\MostarConstruct.dll
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\bin\Debug\netcoreapp2.0\MostarConstruct.pdb
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\obj\Debug\netcoreapp2.0\MostarConstruct.csprojResolveAssemblyReference.cache
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\obj\Debug\netcoreapp2.0\MostarConstruct.csproj.CoreCompileInputs.cache
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\obj\Debug\netcoreapp2.0\MostarConstruct.AssemblyInfoInputs.cache
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\obj\Debug\netcoreapp2.0\MostarConstruct.AssemblyInfo.cs
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\obj\Debug\netcoreapp2.0\MostarConstruct.dll
+C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct\obj\Debug\netcoreapp2.0\MostarConstruct.pdb

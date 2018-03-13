@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MostarConstruct.Data</id>
+    <version>1.0.0</version>
+    <authors>MostarConstruct.Data</authors>
+    <owners>MostarConstruct.Data</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp2.0">
+        <dependency id="Microsoft.EntityFrameworkCore" version="2.0.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="2.0.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.Tools" version="2.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Nisvet\Desktop\MostarConstruct\MostarConstruct\MostarConstruct.Data\bin\Debug\netcoreapp2.0\MostarConstruct.Data.dll" target="lib\netcoreapp2.0\MostarConstruct.Data.dll" />
+  </files>
+</package>

@@ -1,0 +1,166 @@
+﻿@model RadniciGrupniUploadSlikaViewModel
+@{
+    ViewData["Title"] = "Slike";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <section class="panel">
+            <div class="panel-heading">
+                <h2>Slike</h2>
+            </div>
+            <div class="panel-body">
+                @if (TempData["greske"] == null && TempData["uspjeh"] == null)
+                {
+                    <div class="alert alert-info">
+                        Slike koje želite učitati moraju biti u sljedećem formatu: (JMBG radnika).jpg
+                    </div>
+                }
+
+                @if (TempData["uspjeh"] != null)
+                {
+                <div class="alert alert-success alert-dismissable">
+                    <button class="close" type="button" data-dismiss="alert"></button>
+                    <strong>Uspješno ste uploadovali slike sljedećim radnicima:</strong>
+                    <ul>
+                        @Html.Raw(TempData["uspjeh"])
+                    </ul>
+                </div>
+                }
+
+                @if (TempData["greske"] != null)
+                {
+                <div class="alert alert-danger alert-dismissable">
+                    <button class="close" type="button" data-dismiss="alert"></button>
+                    <strong>Došlo je do sljedećih greški:</strong>
+                    <ul>
+                        @Html.Raw(TempData["greske"])
+                    </ul>
+                </div>
+                }
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- The file upload form used as target for the file upload widget -->
+                        <form id="fileupload" asp-action="Slike" method="post" enctype="multipart/form-data">
+                            <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                            <div class="row fileupload-buttonbar">
+                                <div class="col-lg-7">
+                                    <!-- The fileinput-button span is used to style the file input field as button -->
+                                    <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Odaberite slike...</span>
+                                        <input id="upload" asp-for="Slike" type="file" multiple onchange='Pretpregled(this)'>
+                                    </span>
+                                    <button type="submit" class="btn btn-primary start">
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Započni učitavanje</span>
+                                    </button>
+                                    <span>
+                                        Odabrano <span id="brojFajlova">0</span> datoteka
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <hr />
+                            <!-- The table listing the files available for upload/download -->
+                            <table class="table table-borderer">
+                                <thead>
+                                    <tr>
+                                        <th>Pretpregled</th>
+                                        <th>Naziv</th>
+                                        <th>Veličina</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </form>
+                        <br>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+</section>
+
+<script type="text/javascript">
+
+    var Slike = [];
+    var brojSlika = 0;
+
+    function Pretpregled(element) {
+        var elementi = element.files;
+        var length = elementi.length;
+
+        brojSlika += length;
+
+        for (var i = 0; i < length; i++) {
+            if (!elementi[i].type.includes("image")) {
+                brojSlika -= 1;
+                continue;
+            }
+
+            var src = URL.createObjectURL(elementi[i]);
+            var imeFajla = elementi[i].name;
+            var velicina = formatBytes(elementi[i].size);
+
+            Slike.push(elementi[i]);
+
+            $("table > tbody").append("<tr id='" + imeFajla + "'><td><img width=100 height=100 src='"
+                + src + "'></td><td>"
+                + imeFajla + "</td><td>"
+                + velicina + "</td>"
+                + "<td style='vertical-align: middle'>" +
+                "<button type='button' class='btn btn-outline red' onclick='Obrisi(\"" + imeFajla + "\")' ><i class='fa fa-trash'></i> Obrisi</button>" + "</td></tr>");
+        }
+
+        $("#brojFajlova").html(brojSlika);
+    }
+
+    function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " Bytes";
+        else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + " KB";
+        else if (bytes < 1073741824) return (bytes / 1048576).toFixed(2) + " MB";
+        else return (bytes / 1073741824).toFixed(2) + " GB";
+    }
+
+    function Obrisi(naziv) {
+
+        for (var i = 0; i < Slike.length; i++) {
+            if (Slike[i].name === naziv) {
+                Slike.splice(i, 1);
+                document.getElementById(naziv).remove();
+                brojSlika -= 1;
+                $("#brojFajlova").html(brojSlika);
+                return;
+            }
+        }
+    }
+
+    function Submit() {
+        var Model = new FormData();
+
+        for (var i = 0; i < Slike.length; i++) {
+            Model.append("Files", Slike[i]);
+        }
+
+        $.ajax({
+            url: '@Url.Action("Slike", "Radnici")',
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: Model
+            //success: function (success) {
+            //    if (success) {
+            //        window.location.href = "/Radnici";
+            //    }
+            //}
+        });
+    }
+
+
+</script>

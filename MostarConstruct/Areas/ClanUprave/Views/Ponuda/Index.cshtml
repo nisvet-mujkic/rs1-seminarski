@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    int brojac = 1;
+}
+@model IEnumerable<Ponuda>
+
+<section id="main-content">
+    <section class="wrapper">
+        <section class="panel">
+            <header class="panel-heading">
+                <h2>Lista ponuda</h2>
+
+            </header>
+
+            <div class="panel-body">
+                <div class="pull-right">
+
+                    <div class="form-group">
+                        <br />
+                        <a id="link" href="@Url.Action("Dodaj", "Ponuda")" class="btn btn-primary modal-link"><i class="fa fa-plus"></i> Dodaj</a>
+                        <br />
+                    </div>
+                </div>
+
+            <br />
+            <br />
+            <br />
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Redni broj</th>
+                        <th>Naziv</th>
+                        <th>Datum izdavanja</th>
+                        <th>Sadržaj</th>
+                        <th>Potrebno vrijeme </th>
+                        <th>Predlozena cijena</th>
+                        <th>Izdao</th>
+
+
+                        <th class="text-center">Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model)
+                    {
+                        <tr>
+                            <td>@(brojac++)</td>
+                            <td>@r.Naziv</td>
+                            <td>@r.DatumIzdavanja</td>
+                            <td>@r.Sadrzaj</td>
+                            <td>@r.PotrebnoVrijeme (mjeseci)</td>
+                            <td>@r.PredlozenaCijena KM</td>
+                            <td>
+                                @r.ClanUprave.Osoba.Ime
+                                &nbsp;
+                                @r.ClanUprave.Osoba.Prezime
+                                &nbsp;
+                                <b>[Clan uprave] </b>
+                            </td>
+
+
+
+
+
+                            <td class="text-left">
+                                <a class="btn btn-info" asp-action="Izvjestaj" asp-route-PonudaId="@r.PonudaID"  target="_blank"><i class="fa fa-print"></i> Print</a>&nbsp;
+
+                                <a asp-action="Uredi" asp-route-PonudaId="@r.PonudaID" class="btn btn-info"> Uredi</a>&nbsp;
+                               <br /> <a asp-action="Obrisi" asp-route-id="@r.PonudaID" class="btn btn-danger">Obriši</a>
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+                <a class="btn btn-info" asp-action="Izvjestaj" target="_blank"><i class="fa fa-print"></i> Izvjestaj</a>&nbsp;<br />
+            </div>
+       </section>
+        </section>
+    </section>

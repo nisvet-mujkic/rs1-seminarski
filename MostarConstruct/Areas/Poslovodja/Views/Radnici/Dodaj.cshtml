@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Dodaj";
+
+    var datum = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T');
+}
+
+@model RadniciDodajViewModel
+
+
+<section id="main-content">
+    <section class="wrapper">
+        <section class="panel">
+            <header class="panel-heading">
+                <h2>Dodaj radnika</h2>
+
+            </header>
+
+            <div class="panel-body">
+                <form asp-action="Dodaj" method="post">
+
+                    @if (!ViewData.ModelState.IsValid)
+            {
+                        <div asp-validation-summary="All" class="alert alert-danger"></div>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Osoba.Ime">Ime:</label>
+                                <input asp-for="Osoba.Ime" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Osoba.Prezime">Prezime:</label>
+                                <input asp-for="Osoba.Prezime" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Osoba.DatumRodjenja">Datum rodjenja:</label>
+                                <input asp-for="Osoba.DatumRodjenja" class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="DrzavaID">Drzava:</label>
+                                <select asp-for="DrzavaID" asp-items="Model.Drzave" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="RegijaID">Regija:</label>
+                                <select asp-for="RegijaID" asp-items="Model.Regije" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="GradID">Grad:</label>
+                                <select asp-for="GradID" asp-items="Model.Gradovi" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="PozicijaID">Pozicija:</label>
+                                <select asp-for="PozicijaID" asp-items="Model.Pozicije" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Osoba.Email">Email:</label>
+                                <input asp-for="Osoba.Email" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Radnik.DatumZaposlenja">Datum zaposlenja:</label>
+                                <input asp-for="Radnik.DatumZaposlenja" class="form-control" value="@datum">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Osoba.JMBG">JMBG:</label>
+                                <input asp-for="Osoba.JMBG" class="form-control" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Radnik.Staz">Staz:</label>
+                                <input asp-for="Radnik.Staz" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Radnik.DodatakNaSatnicu">Dodatak na satnicu:</label>
+                                <input asp-for="Radnik.DodatakNaSatnicu" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @*<label asp-for="Radnik..">Uloga:</label>
+                                    <select asp-for="" class="form-control" asp-items="Model.Uloge"></select>*@
+                            </div>
+                        </div>
+                    </div>
+
+                
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <div class="form-group">
+                                    <div class="controls col col-md-10">
+                                       <h3><b>Security code:</b></></h3>
+
+                                        <dnt-captcha asp-captcha-generator-max="9000"
+                                                     asp-captcha-generator-min="1"
+                                                     asp-captcha-generator-language="English"
+                                                     asp-placeholder="Security code as a number"
+                                                     asp-validation-error-message="Please enter the security code as a number."
+                                                     asp-font-name="Tahoma"
+                                                     asp-font-size="20"
+                                                     asp-fore-color="#333333"
+                                                     asp-back-color="#ccc"
+                                                     asp-text-box-class="text-box single-line form-control col-md-4"
+                                                     asp-text-box-template="<div class='input-group col-md-4'><span class='input-group-addon'><span class='glyphicon glyphicon-lock'></span></span>{0}</div>"
+                                                     asp-validation-message-class="text-danger"
+                                                     asp-refresh-button-class="glyphicon glyphicon-refresh btn-sm" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Dodaj</button>
+                                <a asp-action="Index" class="btn btn-default"><i class="fa fa-times"></i> Odustani</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+
+                </div>
+        </section>
+    </section>
+    </section>

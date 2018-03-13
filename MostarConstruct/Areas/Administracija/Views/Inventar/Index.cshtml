@@ -1,0 +1,96 @@
+﻿@model InventarIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<section id="main-content">
+    <section class="wrapper">
+        
+
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h2>Dodaj inventar</h2>
+                        </div>
+                        <div class="col-md-1">
+                            <br />
+                            <a asp-action="Dodaj"  class="btn btn-primary"><i class="fa fa-plus"></i> Dodaj</a>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <button id="showFilters"  style="width:157px;" type="button" class="btn btn-info"><i class="fa fa-filter"></i> Prikazi filtere</button>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="panel-body">
+
+                    <form>
+                        <div class="row" id="filteri" hidden>
+                                <div class="col-md-10">
+                                    <input name="searchString" asp-for="SearchString" class="form-control" placeholder="Unesite naziv, serijski broj ili kategoriju" />
+                                </div>
+                                <div class="col-md-2">
+                                    <button id="btnSubmit"  style="width:157px" type="submit" class="btn btn-info"><i class="fa fa-search"></i> Pretraga</button>
+                                </div>
+                        </div>
+                    </form>
+                    <br />
+                    <table class="table table-borderer table-striped">
+                        <thead>
+                            <tr>
+                                <th>Naziv</th>
+                                <th>Serijski broj</th>
+                                <th>Kategorija</th>
+                                <th>Datum kupovine</th>
+                                <th>Ispravan</th>
+                                <th>Zauzet</th>
+                                <th class="text-center">Akcije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model.Rows)
+                        {
+                            <tr>
+                                <td>@i.Naziv</td>
+                                <td>@i.SerijskiBroj</td>
+                                <td>@i.Kategorija</td>
+                                <td>@i.DatumKupovine</td>
+                                <td>@i.Ispravan</td>
+                                <td>@i.Zauzet</td>
+                                <td class="text-center">
+                                    <form asp-action="Obrisi" method="post">
+                                        <input hidden name="InventarID" value="@i.InventarID" />
+                                        <a asp-action="Uredi" asp-route-inventarID="@i.InventarID" class="btn btn-info"><i class="fa fa-pencil"></i> Uredi</a>
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Obrisi</button>
+                                    </form>
+                                </td>
+                            </tr>
+                    }
+                        </tbody>
+                    </table>
+
+                    <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+                         page-class="btn" page-class-normal="btn-default"
+                         page-class-selected="btn-primary" class="btn-group pull-right">
+                    </div>
+                </div>
+            </section>
+
+
+
+
+    </section>
+</section>
+
+<script>
+    $(function () {
+        $("#showFilters").click(function () {
+
+            $("#filteri").toggle();
+
+        });
+
+
+    })
+</script>

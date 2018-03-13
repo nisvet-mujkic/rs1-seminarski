@@ -1,0 +1,110 @@
+﻿@model DrzaveIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>
+                    Lista drzava
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="pull-right">
+                    <div class="form-group">
+                        <button id="dodavanje" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i> Dodaj</button>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Oznaka</th>
+                            <th>Regije</th>
+                            <th class="text-center">Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var d in Model.Drzave)
+                        {
+                            <tr>
+                                <td>@d.Naziv</td>
+                                <td>@d.Oznaka</td>
+                                <td>
+                                    <div id="regije_@d.DrzavaID" hidden>
+                                        @await Component.InvokeAsync("ListaKantona", new { drzavaId = d.DrzavaID })
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <form asp-action="Obrisi" method="post">
+                                        <button type="button" class="btn btn-send btnRegije" idValue="@d.DrzavaID">Prikazi regije</button>
+                                        <button type="button" class="btn btn-warning btnUredi" idValue="@d.DrzavaID">Uredi</button>
+                                        <input name="id" value="@d.DrzavaID" hidden/>
+                                        <button type="submit" class="btn btn-danger">Obrisi</button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+                             page-class="btn" page-class-normal="btn-default"
+                             page-class-selected="btn-primary" class="btn-group pull-right">
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div id="modalPlace">
+
+                </div>
+
+                <div id="ajaxDiv"></div>
+
+            </div>
+        </div>
+    </section>
+</section>
+
+<script>
+
+    $(".btnUredi").click(function () {
+        var btn = $(this);
+        var id = btn.attr("idValue");
+
+        $.ajax({
+            url: "@Url.Action("Uredi", "Drzave")",
+            type: "GET",
+            data: { id: id },
+            success: function (result) {
+                $("#ajaxDiv").html(result);
+            }
+        });
+    });
+
+    $(".btnRegije").click(function(){
+        var btn = $(this);
+        var id = btn.attr("idValue");
+        $("#regije_" + id).toggle();
+    });
+
+    $.ajax({
+        url: "@Url.Action("Dodaj", "Drzave")",
+        type: "GET",
+        contentType: "html",
+        success: function (result) {
+            $("#modalPlace").html(result);
+        }
+    });
+</script>
+
